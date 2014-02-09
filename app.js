@@ -12,10 +12,12 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 
 var io = require('socket.io').listen(server);
+var api = require('./websocketApi.js');
+var sga = require('./socketGenApi.js').init(api);
 
 io.sockets.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
+    socket.emit(sga.news, { hello: 'world' });
+    socket.on(sga.myOtherEvent, function (data) {
         console.log(data);
     });
 });

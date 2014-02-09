@@ -6,11 +6,21 @@
 <body>
     <h1>SocketGenApi</h1>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="websocketApi.js"></script>
+    <script src="socketGenApi.js"></script>
     <script>
         var socket = io.connect('http://localhost:3000');
-        socket.on('news', function (data) {
-            console.log(data);
-            socket.emit('my other event', { my: 'data' });
+//        socket.on('news', function (data) {
+//            console.log(data);
+//            socket.emit('myOtherEvent', { my: 'data' });
+//        });
+
+        console.log(sga);
+        sga = sga.init(api);
+
+        sga.news.on(function (data) {
+           console.log(data);
+            sga.myOtherEvent.emit({ my: 'data' });
         });
     </script>
 </body>
